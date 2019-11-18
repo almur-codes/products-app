@@ -5,7 +5,7 @@ import "./ListItem.css";
 export default class ListItem extends React.Component<ListItemProps> {
     public render() {
         return (
-            <li key={this.props.id} className="list-item"> 
+            <li key={this.props.id} className="list-item" onClick={this.props.handleClick}>
                 <div>
                     <b>Name:</b> { this.props.name }
                 </div> 

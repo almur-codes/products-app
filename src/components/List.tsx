@@ -11,7 +11,7 @@ export default class List extends React.Component<ListProps> {
                 key={id} 
                 id={id} 
                 name={name} 
-                price={price} 
+                price={price}
             />
         );
     }
