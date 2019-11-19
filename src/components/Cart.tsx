@@ -19,7 +19,7 @@ export default class Cart extends React.Component<CartProps> {
                                     price={cartProduct.price}
                                     quantity={1}
                                     handleClick={() => alert(1)} />
-                            ); 
+                            );
                         }) 
                     }
                 </ol>

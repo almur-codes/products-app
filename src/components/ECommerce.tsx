@@ -50,7 +50,9 @@ export default class ECommerce extends React.Component {
                         { this.state.products.slice().map(product => { return this.renderListItem(product) }) }
                     </ol>
                 </div>
-			    <Cart cartProducts={this.state.cart} handleItemClick={(event) => {console.log("hey",event); this.removeFromCart(event)}} />
+                <Cart 
+                    cartProducts={this.state.cart} 
+                    handleItemClick={(event) => {console.log("hey",event); this.removeFromCart(event)}} />
             </div>
         );
     }
