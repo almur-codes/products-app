@@ -11,6 +11,12 @@ export default class CartItem extends React.Component<CartItemProps> {
                 <div>
                     <b>Price:</b> CAD { this.props.price }
                 </div>
+                <div>
+                    <b>Quantity:</b> { this.props.quantity }
+                </div>
+                <div>
+                    <b>Sub Total:</b> CAD { this.props.price * this.props.quantity }
+                </div>
             </li>
         )
     }

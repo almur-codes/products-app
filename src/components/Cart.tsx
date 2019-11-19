@@ -4,6 +4,11 @@ import { CartProps } from '../interfaces';
 import CartItem from './CartItem';
 
 export default class Cart extends React.Component<CartProps> {
+    constructor(props: any){
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+    
     public render() {
         return (
             <div className="cart">
@@ -17,13 +22,17 @@ export default class Cart extends React.Component<CartProps> {
                                     id={cartProduct.id} 
                                     name={cartProduct.name} 
                                     price={cartProduct.price}
-                                    quantity={1}
-                                    handleClick={() => alert(1)} />
+                                    quantity={cartProduct.quantity}
+                                    handleClick={() => this.handleClick(cartProduct.id)} />
                             ); 
                         }) 
                     }
                 </ol>
             </div>
         );
+    }
+
+    public handleClick(id: number){
+        this.props.handleItemClick(id)
     }
 }

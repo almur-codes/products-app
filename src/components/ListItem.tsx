@@ -1,8 +1,8 @@
 import React from "react";
-import { ListItemProps } from '../interfaces';
+import { StoreItemProps } from '../interfaces';
 import "./ListItem.css";
 
-export default class ListItem extends React.Component<ListItemProps> {
+export default class ListItem extends React.Component<StoreItemProps> {
     public render() {
         return (
             <li key={this.props.id} className="list-item" onClick={this.props.handleClick}>
@@ -11,6 +11,9 @@ export default class ListItem extends React.Component<ListItemProps> {
                 </div> 
                 <div>
                     <b>Price:</b> CAD { this.props.price }
+                </div>
+                <div>
+                    <b>Stock Available:</b> { this.props.stockAvailable }
                 </div>
             </li>
         );

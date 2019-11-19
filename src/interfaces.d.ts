@@ -1,18 +1,18 @@
-export interface ListItemProps {
+export interface StoreItemProps {
     id: number,
     name: string,
     price: number,
-    quantity?: number,
+    stockAvailable: number,
     handleClick?: ((event: MouseEvent<HTMLLIElement, MouseEvent>) => void) | undefined = () => {}
 }
 
 export interface ListProps {
-    products: Array<ListItemProps>
+    products: Array<StoreItemProps>
 }
 
 export interface CartProps {
     cartProducts: Array<CartItemProps>
-    handleItemClick: ((event: MouseEvent<HTMLLIElement, MouseEvent>) => void) | undefined = () => {}
+    handleItemClick: (id: number) => void = () => {}
 }
 
 export interface CartItemProps {
