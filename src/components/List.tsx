@@ -1,17 +1,19 @@
 import React from 'react';
 import ListItem from './ListItem';
-import { ListItemProps, ListProps } from '../interfaces';
+import { StoreItemProps, ListProps } from '../interfaces';
 import "./List.css";
 
 export default class List extends React.Component<ListProps> {
     
-    renderListItem({ id, name, price }: ListItemProps){
+    renderListItem({ id, name, price, stockAvailable, isInCart }: StoreItemProps){
         return (
             <ListItem 
                 key={id} 
                 id={id} 
                 name={name} 
                 price={price}
+                isInCart={isInCart}
+                stockAvailable={stockAvailable}
             />
         );
     }
