@@ -9,11 +9,11 @@ export default class ECommerce extends React.Component {
     
     state = {
         store: [
-            { id: 1, name: "one", price: 10, stockAvailable: 10 },
-            { id: 2, name: "two", price: 20, stockAvailable: 10 },
-            { id: 3, name: "three", price: 30, stockAvailable: 10 },
-            { id: 4, name: "four", price: 40, stockAvailable: 10 },
-            { id: 5, name: "five", price: 50, stockAvailable: 10 },
+            { id: 1, name: "one", price: 10, stockAvailable: 1, isInCart: false },
+            { id: 2, name: "two", price: 20, stockAvailable: 5, isInCart: false },
+            { id: 3, name: "three", price: 30, stockAvailable: 8, isInCart: false },
+            { id: 4, name: "four", price: 40, stockAvailable: 3, isInCart: false },
+            { id: 5, name: "five", price: 50, stockAvailable: 6, isInCart: false },
         ],
         cart: []
     }
@@ -31,8 +31,7 @@ export default class ECommerce extends React.Component {
 
         if( !storeProduct ){
             // throw exception
-            // go look at error boundries in ReactJS
-            return;
+            throw new Error("Oops! Unexpected error occurred.")
         }
 
         if( cartProduct ){
@@ -53,6 +52,7 @@ export default class ECommerce extends React.Component {
                 quantity: 1
             })
             storeProduct.stockAvailable--;
+            storeProduct.isInCart = true;
         }
 
         this.setState({
@@ -74,12 +74,12 @@ export default class ECommerce extends React.Component {
 
         if( !storeProduct || !cartProduct ){
             // throw exception
-            // go look at error boundries in ReactJS
-            return;
+            throw new Error("Oops! Unexpected error occurred.")
         }
 
         cart = cart.filter((product) => product.id !== id);
         storeProduct.stockAvailable += cartProduct.quantity
+        storeProduct.isInCart = false;
 
         this.setState({
             cart: cart,
@@ -87,7 +87,7 @@ export default class ECommerce extends React.Component {
         });
     }
 
-    renderListItem({ id, name, price, stockAvailable }: StoreItemProps){
+    renderListItem({ id, name, price, stockAvailable, isInCart }: StoreItemProps){
         return (
             <ListItem 
                 key={id} 
@@ -95,6 +95,7 @@ export default class ECommerce extends React.Component {
                 name={name} 
                 price={price}
                 stockAvailable={stockAvailable}
+                isInCart={isInCart}
                 handleClick={() => this.addToCart(id)}
             />
         );

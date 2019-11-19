@@ -4,7 +4,7 @@ import { CartItemProps } from '../interfaces';
 export default class CartItem extends React.Component<CartItemProps> {
     public render(){
         return (
-            <li key={this.props.id} className="list-item" onClick={this.props.handleClick}> 
+            <li key={this.props.id} className="list-item"> 
                 <div>
                     <b>Name:</b> { this.props.name }
                 </div> 
@@ -16,6 +16,9 @@ export default class CartItem extends React.Component<CartItemProps> {
                 </div>
                 <div>
                     <b>Sub Total:</b> CAD { this.props.price * this.props.quantity }
+                </div>
+                <div>
+                    <button onClick={this.props.handleClick}>Remove from cart</button>
                 </div>
             </li>
         )

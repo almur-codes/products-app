@@ -3,6 +3,7 @@ export interface StoreItemProps {
     name: string,
     price: number,
     stockAvailable: number,
+    isInCart: boolean,
     handleClick?: ((event: MouseEvent<HTMLLIElement, MouseEvent>) => void) | undefined = () => {}
 }
 

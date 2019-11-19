@@ -5,13 +5,14 @@ import "./List.css";
 
 export default class List extends React.Component<ListProps> {
     
-    renderListItem({ id, name, price, stockAvailable }: StoreItemProps){
+    renderListItem({ id, name, price, stockAvailable, isInCart }: StoreItemProps){
         return (
             <ListItem 
                 key={id} 
                 id={id} 
                 name={name} 
                 price={price}
+                isInCart={isInCart}
                 stockAvailable={stockAvailable}
             />
         );
