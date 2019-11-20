@@ -3,7 +3,11 @@ import Cart from './Cart';
 import { CartItemProps, StoreItemProps } from '../interfaces';
 import ListItem from './ListItem';
 import "./List.css";
+<<<<<<< HEAD
 import ECommerceStore from '../store'
+=======
+import ECommerceStore from "../store";
+>>>>>>> 014a9a8272cf4634f6059e129cddd026a11822c9
 
 
 export default class ECommerce extends React.Component {
@@ -56,7 +60,7 @@ export default class ECommerce extends React.Component {
             storeProduct.isInCart = true;
         }
 
-        ECommerceStore.increase(storeProduct.price)
+        // ECommerceStore.increase( storeProduct.price )
 
         this.setState({
             cart: cart,

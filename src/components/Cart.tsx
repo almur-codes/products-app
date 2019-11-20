@@ -32,20 +32,20 @@ export default class Cart extends React.Component<CartProps> {
                     }
                 </ol>
                 <span>
-                    {this.displayGrandTotal()}
+                    {/* {this.displayGrandTotal()} */}
                 </span>
             </div>
         );
     }
 
-    public displayGrandTotal(){
-        console.log(ECommerceStore)
-        return (
-            <div>
-                Your grand total is CAD { ECommerceStore.grandTotal }
-            </div>
-        )
-    }
+    // public displayGrandTotal(){
+    //     console.log(ECommerceStore)
+    //     return (
+    //         <div>
+    //             Your grand total is CAD { ECommerceStore.grandTotal }
+    //         </div>
+    //     )
+    // }
 
     public handleClick(id: number){
         this.props.handleItemClick(id)
