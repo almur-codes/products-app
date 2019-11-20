@@ -3,7 +3,7 @@ import "./Cart.css";
 import { CartProps } from '../interfaces';
 import CartItem from './CartItem';
 import { observer } from 'mobx-react';
-import ECommerceStore from "../store";
+import ECommerceStore from '../store';
 
 @observer
 export default class Cart extends React.Component<CartProps> {
@@ -38,14 +38,13 @@ export default class Cart extends React.Component<CartProps> {
         );
     }
 
-    // public displayGrandTotal(){
-    //     console.log(ECommerceStore)
-    //     return (
-    //         <div>
-    //             Your grand total is CAD { ECommerceStore.grandTotal }
-    //         </div>
-    //     )
-    // }
+    public displayGrandTotal(){
+        return (
+            <div>
+                Your grand total is CAD { ECommerceStore.grandTotal }
+            </div>
+        )
+    }
 
     public handleClick(id: number){
         this.props.handleItemClick(id)

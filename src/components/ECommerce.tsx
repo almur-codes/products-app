@@ -3,11 +3,7 @@ import Cart from './Cart';
 import { CartItemProps, StoreItemProps } from '../interfaces';
 import ListItem from './ListItem';
 import "./List.css";
-<<<<<<< HEAD
-import ECommerceStore from '../store'
-=======
-import ECommerceStore from "../store";
->>>>>>> 014a9a8272cf4634f6059e129cddd026a11822c9
+// import ECommerceStore from '../store';
 
 
 export default class ECommerce extends React.Component {
@@ -116,6 +112,9 @@ export default class ECommerce extends React.Component {
                     <ol>
                         { this.state.store.slice().map(product => { return this.renderListItem(product) }) }
                     </ol>
+                    <div>
+                        {/* Current Stock Value CAD { ECommerceStore.stockValue } */}
+                    </div>
                 </div>
 			    <Cart cartProducts={this.state.cart} handleItemClick={(id: number) => this.removeFromCart(id)} />
             </div>
