@@ -1,6 +1,7 @@
 import React from "react";
 import { StoreItemProps } from '../interfaces';
 import "./ListItem.css";
+import ECommerceStore from '../stores/ECommerce.store';
 
 export default class ListItem extends React.Component<StoreItemProps> {
     public render() {
@@ -22,7 +23,23 @@ export default class ListItem extends React.Component<StoreItemProps> {
         );
     }
 
-    renderButton({ isInCart, stockAvailable}: StoreItemProps){
+    renderButton({ isInCart, stockAvailable, id }: StoreItemProps){
+        if( ECommerceStore.useMobX ){
+            if(isInCart && stockAvailable > 0){
+                return (
+                    <button onClick={ () => ECommerceStore.addToCart(id) }>Add Quantity</button>
+                )
+            }
+            if (stockAvailable < 1) {
+                return (
+                    <button disabled>Insufficient Stock</button>
+                )
+            }
+            return (
+                <button onClick={ () => ECommerceStore.addToCart(id) }>Add to Cart</button>
+            )
+        }
+
         if(isInCart && stockAvailable > 0){
             return (
                 <button onClick={this.props.handleClick}>Add Quantity</button>

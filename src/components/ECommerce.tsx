@@ -3,9 +3,10 @@ import Cart from './Cart';
 import { CartItemProps, StoreItemProps } from '../interfaces';
 import ListItem from './ListItem';
 import "./List.css";
-// import ECommerceStore from '../store';
+import ECommerceStore from '../stores/ECommerce.store';
+import { observer } from 'mobx-react';
 
-
+@observer
 export default class ECommerce extends React.Component {
     
     state = {
@@ -46,6 +47,7 @@ export default class ECommerce extends React.Component {
             }
 
         } else {
+            // check if stock is available
             cart.push({
                 id: storeProduct.id,
                 name: storeProduct.name,
@@ -75,6 +77,7 @@ export default class ECommerce extends React.Component {
         let cartProduct: CartItemProps | undefined = cart.find(cartProduct => cartProduct.id === id)
         let storeProduct: StoreItemProps | undefined = store.find(storeProduct => storeProduct.id === id)
 
+        // be more explicit
         if( !storeProduct || !cartProduct ){
             // throw exception
             throw new Error("Oops! Unexpected error occurred.")
@@ -91,6 +94,19 @@ export default class ECommerce extends React.Component {
     }
 
     renderListItem({ id, name, price, stockAvailable, isInCart }: StoreItemProps){
+        if( ECommerceStore.useMobX ){
+            return (
+                <ListItem 
+                    key={id} 
+                    id={id} 
+                    name={name} 
+                    price={price}
+                    stockAvailable={stockAvailable}
+                    isInCart={isInCart}
+                    handleClick={() => {}}
+                />
+            );
+        }
         return (
             <ListItem 
                 key={id} 
@@ -105,6 +121,22 @@ export default class ECommerce extends React.Component {
     }
     
     public render(){
+        if( ECommerceStore.useMobX ){
+            return (
+                <div>
+                    <div className="products">
+                        <h3>Available Products</h3>
+                        <ol>
+                            { ECommerceStore.storeProducts.slice().map(product => { return this.renderListItem(product) }) }
+                        </ol>
+                        <div>
+                            Current Stock Value CAD { ECommerceStore.stockValue }
+                        </div>
+                    </div>
+                    <Cart cartProducts={ECommerceStore.cartProducts} handleItemClick={() => {}} />
+                </div>
+            );
+        }
         return (
             <div>
                 <div className="products">
@@ -112,9 +144,6 @@ export default class ECommerce extends React.Component {
                     <ol>
                         { this.state.store.slice().map(product => { return this.renderListItem(product) }) }
                     </ol>
-                    <div>
-                        {/* Current Stock Value CAD { ECommerceStore.stockValue } */}
-                    </div>
                 </div>
 			    <Cart cartProducts={this.state.cart} handleItemClick={(id: number) => this.removeFromCart(id)} />
             </div>

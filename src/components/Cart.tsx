@@ -1,9 +1,9 @@
 import React from "react";
 import "./Cart.css";
-import { CartProps } from '../interfaces';
+import { CartProps, CartItemProps } from '../interfaces';
 import CartItem from './CartItem';
 import { observer } from 'mobx-react';
-import ECommerceStore from '../store';
+import ECommerceStore from '../stores/ECommerce.store';
 
 @observer
 export default class Cart extends React.Component<CartProps> {
@@ -13,6 +13,31 @@ export default class Cart extends React.Component<CartProps> {
     }
     
     public render() {
+        if( ECommerceStore.useMobX ){
+            return (
+                <div className="cart">
+                    <h3>Your Cart</h3>
+                    <ol>
+                        { 
+                            ECommerceStore.cartProducts.slice().map((cartProduct: CartItemProps) => { 
+                                return (
+                                    <CartItem 
+                                        key={cartProduct.id} 
+                                        id={cartProduct.id} 
+                                        name={cartProduct.name} 
+                                        price={cartProduct.price}
+                                        quantity={cartProduct.quantity}
+                                        handleClick={() => {}} />
+                                ); 
+                            }) 
+                        }
+                    </ol>
+                    <span>
+                        Your grand total is CAD { ECommerceStore.grandTotal }
+                    </span>
+                </div>
+            );
+        }
         return (
             <div className="cart">
                 <h3>Your Cart</h3>
@@ -31,20 +56,13 @@ export default class Cart extends React.Component<CartProps> {
                         }) 
                     }
                 </ol>
-                <span>
-                    {/* {this.displayGrandTotal()} */}
-                </span>
             </div>
         );
     }
 
-    public displayGrandTotal(){
-        return (
-            <div>
-                Your grand total is CAD { ECommerceStore.grandTotal }
-            </div>
-        )
-    }
+    // public handleClick = (id: number): void => {
+
+    // }
 
     public handleClick(id: number){
         this.props.handleItemClick(id)
